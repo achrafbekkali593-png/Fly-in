@@ -1,0 +1,46 @@
+nb_drones: 3
+
+start_hub: hub 0 0 [color=green] 
+
+hub: roof1 3 4 [zone=restricted color=red]
+connection: hub-corridorA
+hub: roof2 6 2 [zone=normal color=blue]
+hub: corridorA 4 3 [max_drones=2  color=green zone=priority ]
+hub: tunnelB 7 4 [zone=normal color=red]
+hub: obstacleX 5 5  [zone=blocked color=banana ]
+end_hub: goal 10 10 [color=yellow]
+#  [[zone=blocked color=banana]
+connection: hub-roof1
+
+connection: roof1-roof2
+connection: roof2-goal
+connection: corridorA-tunnelB [max_link_capacity=2]
+connection: tunnelB-goal
+
+# [hub]/ [goal], [goa-]], [hu b] DONE
+# Error: expected 1 to 3 key=value pairs in [] at line 5: '[zone = normal color=blue]'
+ 
+# checking syntax start_hub : <name> <x> <y> [metadata]
+
+# comments/spaces with \n lines in any place except the front of the config, DONE
+# name should not have "-", goal-, -goal, go-al , DONE
+#### values:
+# coordinates could negative , DONE
+# Error: invalid config: start_hub and/or end_hub missing, DONE
+# default zone = normal for all, DONE
+# default max_drones = 1 , no max= -1 or alphabet, DONE
+# default color= none for all, DONE
+# Duplicated end_hub/start_hub, DONE
+# accept just zone=normal for start_hub_end_hub, no other values please: DONE(check)
+### connection
+# duplicated connections, zones not defined in connection , DONE
+# connection: hub--roof1,  connection: ro-of1-roof2, connection: roof1-ro-of2, DONE
+# no end_hub and/or no start_hub, DONE 
+# zone coordinates are negative, DONE(nothing happen)
+# Valid zone names, no dup connection , DONE
+
+
+# nb_drones = 0 , nothing happen. Done, all have max_capacity = default (nb/1) or meta
+# max_drones for start_hub/end_hub, max_drones == 0, DONE
+# TODO nb_drones = todo for start and end DONE
+# max_drones = TODO start_hub/end metadata: {'zone': 'normal', 'color': 'green', 'max_drones': 'todo'}
